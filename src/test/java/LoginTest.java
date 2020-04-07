@@ -6,14 +6,14 @@ import org.testng.annotations.Test;
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
 import static org.testng.Assert.assertEquals;
 
-public class LoginTest extends BaseTestClass{
+public class LoginTest extends BaseTestClass {
 
     String homeUrl = "http://demo.guru99.com/Agile_Project/Agi_V1/index.php";
     String login = "1303";
     String password = "GURU99";
 
     @BeforeMethod
-    public void navigateToHomeUrl(){
+    public void navigateToHomeUrl() {
         driver.get(homeUrl);
     }
 

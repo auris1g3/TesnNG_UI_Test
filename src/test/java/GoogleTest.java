@@ -30,30 +30,30 @@ public class GoogleTest extends BaseTestClass {
         if (!link) {
             driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[3]/a")).click();
             List<WebElement> linkOnPage2 = driver.findElements(By.partialLinkText(searchLink));
-            wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
+            wait.until(( presenceOfElementLocated(By.xpath("//div[@id='result-stats']")) ));
             searchLink(linkOnPage2);
 
             driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[4]/a")).click();
             List<WebElement> linkOnPage3 = driver.findElements(By.partialLinkText(searchLink));
-            wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
+            wait.until(( presenceOfElementLocated(By.xpath("//div[@id='result-stats']")) ));
             searchLink(linkOnPage3);
 
             driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[5]/a")).click();
             List<WebElement> linkOnPage4 = driver.findElements(By.partialLinkText(searchLink));
-            wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
+            wait.until(( presenceOfElementLocated(By.xpath("//div[@id='result-stats']")) ));
             searchLink(linkOnPage4);
 
             driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[6]/a")).click();
             List<WebElement> linkOnPage5 = driver.findElements(By.partialLinkText(searchLink));
-            wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
+            wait.until(( presenceOfElementLocated(By.xpath("//div[@id='result-stats']")) ));
             searchLink(linkOnPage5);
-        } if (!link){
-            assertTrue( false,"STYLUS.UA not found on first 5 pages");
         }
-
+        if (!link) {
+            assertTrue(false, "STYLUS.UA not found on first 5 pages");
+        }
     }
 
-    public void searchLink(List<WebElement> list){
+    public void searchLink(List<WebElement> list) {
         for (WebElement webElement : list) {
             System.out.println(webElement.getText());
             link = true;
