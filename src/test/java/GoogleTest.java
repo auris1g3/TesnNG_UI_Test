@@ -7,12 +7,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
+import static org.testng.Assert.*;
 
 public class GoogleTest extends BaseTestClass {
 
     String homeUrl = "https://www.google.com/";
     Boolean link = false;
-    String searchLink = "stylus.ua";
+    String searchLink = "stylus1.ua";
 
     @BeforeMethod
     public void navigateToHomeUrl() {
@@ -27,30 +28,31 @@ public class GoogleTest extends BaseTestClass {
         searchLink(linkOnPage1);
 
         if (!link) {
-            driver.findElement(By.xpath("a[aria-label='Page 2']")).click();
+            driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[3]/a")).click();
             List<WebElement> linkOnPage2 = driver.findElements(By.partialLinkText(searchLink));
             wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
             searchLink(linkOnPage2);
 
-            driver.findElement(By.xpath("a[aria-label='Page 3']")).click();
+            driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[4]/a")).click();
             List<WebElement> linkOnPage3 = driver.findElements(By.partialLinkText(searchLink));
             wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
             searchLink(linkOnPage3);
 
-            driver.findElement(By.xpath("a[aria-label='Page 4']")).click();
+            driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[5]/a")).click();
             List<WebElement> linkOnPage4 = driver.findElements(By.partialLinkText(searchLink));
             wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
             searchLink(linkOnPage4);
 
-            driver.findElement(By.xpath("a[aria-label='Page 5']")).click();
+            driver.findElement(By.xpath("//*[@id=\"xjs\"]/div/table/tbody/tr/td[6]/a")).click();
             List<WebElement> linkOnPage5 = driver.findElements(By.partialLinkText(searchLink));
             wait.until((presenceOfElementLocated(By.xpath("//div[@id='result-stats']"))));
             searchLink(linkOnPage5);
         } if (!link){
-            System.out.println("STYLUS.UA not found on first 5 pages");
+            assertTrue( false,"STYLUS.UA not found on first 5 pages");
         }
 
     }
+
     public void searchLink(List<WebElement> list){
         for (WebElement webElement : list) {
             System.out.println(webElement.getText());
