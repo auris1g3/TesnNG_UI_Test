@@ -2,8 +2,9 @@
 <suite name="TestSuite">
     <test name="RunMyTests">
         <classes>
-            <class name="LoginTest"/>
             <class name="GoogleTest"/>
+            <class name="RozetkaFilters"/>
+            <class name="LoginTest"/>
         </classes>
     </test>
 </suite>

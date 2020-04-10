@@ -13,7 +13,7 @@ public class GoogleTest extends BaseTestClass {
 
     String homeUrl = "https://www.google.com/";
     Boolean link = false;
-    String searchLink = "stylus1.ua";
+    String searchLink = "stylus.ua";
 
     @BeforeMethod
     public void navigateToHomeUrl() {

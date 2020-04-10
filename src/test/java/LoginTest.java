@@ -1,6 +1,10 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
@@ -13,8 +17,11 @@ public class LoginTest extends BaseTestClass {
     String password = "GURU99";
 
     @BeforeMethod
-    public void navigateToHomeUrl() {
-        driver.get(homeUrl);
+    public void navigateToHomeUrlNew() {
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        wait = new WebDriverWait(driver, 10);
+        driver.get("http://demo.guru99.com/Agile_Project/Agi_V1/index.php");
     }
 
     @Test

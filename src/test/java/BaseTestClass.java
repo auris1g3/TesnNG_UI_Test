@@ -14,6 +14,7 @@ public class BaseTestClass {
     public void setUpBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         wait = new WebDriverWait(driver, 10);
             }
 
