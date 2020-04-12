@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.presenceOfElementLocated;
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends BaseTestClass {
 
@@ -17,7 +17,7 @@ public class GoogleTest extends BaseTestClass {
 
     @BeforeMethod
     public void navigateToHomeUrl() {
-        driver.get(homeUrl);
+        driver.navigate().to(homeUrl);
     }
 
     @Test

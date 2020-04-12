@@ -16,11 +16,11 @@ public class RozetkaFilters extends BaseTestClass {
 
     @BeforeMethod
     public void navigateToHomeUrl() {
-        driver.get(homeUrl);
+        driver.navigate().to(homeUrl);
     }
 
     @Test
-    public void verifyManufacturerFilter() {
+    public void verifyManufacturerFilter() throws Exception {
         driver.findElement(By.name("search")).sendKeys("samsung" + Keys.ENTER);
         wait.until(( presenceOfElementLocated(By.xpath("//span[@class='active']")) ));
         driver.findElement(By.xpath("//a[@name='show_more_categories']/ancestor::ul/li[3]//span[text()='Еще']")).click();
@@ -29,7 +29,7 @@ public class RozetkaFilters extends BaseTestClass {
         WebElement checkBoxAcer = driver.findElement(By.xpath("//label[@for='Acer']"));
         checkBoxAcer.click();
         wait.until(presenceOfElementLocated(By.xpath("//span[@class='link-dotted']")));
-        WebElement checkBoxAsus = driver.findElement(By.xpath("//label[@for='Asus']"));
+        WebElement checkBoxAsus = driver.findElement(By.xpath("//label[@for='Apple']"));
         checkBoxAsus.click();
         driver.findElement(By.xpath("//span[@class='catalog-more__text']")).click();
         List<WebElement> allTitle = driver.findElements(By.xpath("//span[@class='goods-tile__title']"));
@@ -37,7 +37,7 @@ public class RozetkaFilters extends BaseTestClass {
     }
 
     @Test
-    public void verifyPriceFilter() {
+    public void verifyPriceFilter() throws Exception {
         driver.findElement(By.name("search")).sendKeys("samsung" + Keys.ENTER);
         wait.until(( presenceOfElementLocated(By.xpath("//span[@class='active']")) ));
         driver.findElement(By.xpath("//a[@name='show_more_categories']/ancestor::ul/li[3]//span[text()='Еще']")).click();
@@ -58,7 +58,7 @@ public class RozetkaFilters extends BaseTestClass {
     }
 
     @Test
-    public void verifyThreeFilters() {
+    public void verifyThreeFilters() throws Exception {
         driver.findElement(By.name("search")).sendKeys("samsung" + Keys.ENTER);
         wait.until(( presenceOfElementLocated(By.xpath("//span[@class='active']")) ));
         driver.findElement(By.xpath("//a[@name='show_more_categories']/ancestor::ul/li[3]//span[text()='Еще']")).click();
@@ -79,28 +79,32 @@ public class RozetkaFilters extends BaseTestClass {
     }
 
 
-    private boolean verifyFilterManufacturer(List<WebElement> elem) {
+    private boolean verifyFilterManufacturer(List<WebElement> elem) throws Exception {
         for (WebElement webElement : elem) {
-            return webElement.getText().contains("Acer") || webElement.getText().contains("Samsung") || webElement.getText().contains("Asus");
+            if (webElement.getText().contains("Acer") && webElement.getText().contains("Samsung") && webElement.getText().contains("Asus")) {
+                return true;
+            }
         }
-        return false;
+        throw new Exception("No Acer or Samsung or Asus");
     }
 
-    private boolean verifyThreeFilters(List<WebElement> elem) {
+    private boolean verifyThreeFilters(List<WebElement> elem) throws Exception {
         for (WebElement webElement : elem) {
-            return webElement.getText().contains("Android 9") && webElement.getText().contains("AMOLED") && webElement.getText().contains("4 ГБ");
+            if (webElement.getText().contains("Android 9") && webElement.getText().contains("AMOLED") && webElement.getText().contains("4 ГБ")) {
+                return true;
+            }
         }
-        return false;
+        throw new Exception("Not selected Android 9 and AMOLED and RAM 4 Gb");
     }
 
-    private boolean verifyPriceFilter(List<WebElement> elem) {
+    private boolean verifyPriceFilter(List<WebElement> elem) throws Exception {
         for (WebElement webElement : elem) {
             int price = Integer.parseInt(webElement.getText().replaceAll(" ", ""));
             if (price >= 3000 && price <= 15000) {
                 return true;
             }
         }
-        return false;
+        throw new Exception("Selected products do not fall within the range of selected prices");
     }
 
     private void hoverToElement(WebElement elem) {

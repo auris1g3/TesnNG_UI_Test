@@ -20,7 +20,7 @@ public class RozetkaTask1 extends BaseTestClass {
     @BeforeMethod
     //1. Navigate to https://rozetka.com.ua/
     public void navigateToHomeUrl() {
-        driver.get(homeUrl);
+        driver.navigate().to(homeUrl);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class RozetkaTask1 extends BaseTestClass {
         scrollToElement(productActions);
         WebElement compareButtonForFirstMonitor = driver.findElement(By.xpath(compareButtonXpath));
         compareButtonForFirstMonitor.click();
-        String priceFirstMonitor = driver.findElement(By.xpath("//p[@class='product-prices__big product-prices__big_color_red']")).getText().substring(0,4);
+        String priceFirstMonitor = driver.findElement(By.xpath("//p[@class='product-prices__big product-prices__big_color_red']")).getText().substring(0, 4);
         String nameFirstMonitor = driver.findElement(By.xpath("//h1[@class='product__title']")).getText();
         WebElement userLink = driver.findElement(By.xpath("//a[@class='header-topline__user-link link-dashed']"));
         scrollToElement(userLink);
@@ -64,7 +64,7 @@ public class RozetkaTask1 extends BaseTestClass {
         //7. Add second monitor to comparison. Verify icon (2) appears in header close to comparison image (scales). Remember price, name
         WebElement compareButtonForSecondMonitor = driver.findElement(By.xpath(compareButtonXpath));
         compareButtonForSecondMonitor.click();
-        String priceSecondMonitor = driver.findElement(By.xpath("//p[@class='product-prices__big product-prices__big_color_red']")).getText().substring(0,4);
+        String priceSecondMonitor = driver.findElement(By.xpath("//p[@class='product-prices__big product-prices__big_color_red']")).getText().substring(0, 4);
         String nameSecondMonitor = driver.findElement(By.xpath("//h1[@class='product__title']")).getText();
         scrollToElement(userLink);
         assertEquals(driver.findElement(By.xpath("//span[@class='header-actions__button-counter']")).getText(), "2");
@@ -85,8 +85,8 @@ public class RozetkaTask1 extends BaseTestClass {
         assertEquals(nameSecondMonitor, driver.findElement(By.xpath("//a[normalize-space(text())='Монитор 21.5\" BenQ GW2283 (9H.LHLLA.TBE)']")).getText());
 
         //11. Verify that prices are correct (equal to prices which you stored in step4 and step7)
-        assertEquals(priceFirstMonitor.trim(), driver.findElement(By.xpath("//div[normalize-space(text())='2 899']")).getText().substring(0,4).trim());
-        assertEquals(priceSecondMonitor.trim(), driver.findElement(By.xpath("//div[normalize-space(text())='2 499']")).getText().substring(0,4).trim());
+        assertEquals(priceFirstMonitor.trim(), driver.findElement(By.xpath("//div[normalize-space(text())='2 899']")).getText().substring(0, 4).trim());
+        assertEquals(priceSecondMonitor.trim(), driver.findElement(By.xpath("//div[normalize-space(text())='2 499']")).getText().substring(0, 4).trim());
     }
 
     private void hoverToElement(WebElement elem) {
