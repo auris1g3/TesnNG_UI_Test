@@ -17,6 +17,11 @@ import static org.testng.Assert.assertEquals;
 public class GmailTest extends BaseTestClass {
 
     String homeUrl = "https://www.google.com/intl/ru/gmail/about/";
+    String subject = "Test mail";
+    String textMail = "This is the test letter for Automation";
+    String loginName = "testforhillelschool@gmail.com";
+    String passwordName = "testschool";
+    String fileName = "setuplogfile.log";
 
     @BeforeMethod
     public void navigateToHomeUrl() {
@@ -33,45 +38,44 @@ public class GmailTest extends BaseTestClass {
 
         WebElement login = driver.findElement(By.xpath("//input[@type='email']"));
         login.click();
-        login.sendKeys("testforhillelschool@gmail.com" + Keys.ENTER);
+        login.sendKeys(loginName + Keys.ENTER);
 
         WebDriverWait wait = new WebDriverWait(driver, 15);
         WebElement inputPassword = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='password']")));
         inputPassword.click();
-        inputPassword.sendKeys("testschool" + Keys.ENTER);
+        inputPassword.sendKeys(passwordName + Keys.ENTER);
 
         WebElement compose = driver.findElement(By.xpath("//div[@role='button' and text()='Compose']"));
         compose.click();
 
         WebElement inputToSend = driver.findElement(By.xpath("//textarea[@name='to']"));
         inputToSend.click();
-        inputToSend.sendKeys("testforhillelschool@gmail.com" + Keys.ENTER);
+        inputToSend.sendKeys(loginName + Keys.ENTER);
 
         WebElement inputSubject = driver.findElement(By.xpath("//input[@name='subjectbox']"));
         inputSubject.click();
-        inputSubject.sendKeys("Test mail" + Keys.ENTER);
+        inputSubject.sendKeys(subject + Keys.ENTER);
 
         WebElement inputForText = driver.findElement(By.xpath("//div[@role='textbox']"));
         inputForText.click();
-        inputForText.sendKeys("This is the test letter for Automation" + Keys.ENTER);
+        inputForText.sendKeys(textMail + Keys.ENTER);
 
         WebElement attachButton = driver.findElement(By.xpath("//div[@class='a1 aaA aMZ']"));
         attachButton.click();
 
-        uploadFile("C:\\setuplogfile.log");
+        uploadFile("C:\\" + fileName);
         assertEquals(driver.findElement(By.xpath("//div[text()='setuplogfile.log']")).getText(), "setuplogfile.log");
 
         WebElement sendButton = driver.findElement(By.xpath("//div[@role='button' and text()='Send']"));
         sendButton.click();
 
         WebElement lastLetter = wait.until(presenceOfElementLocated(By.xpath("//div[@class='yW'][1]")));
-        //assertEquals(driver.findElement(By.xpath("//div[@class='y6']/span/span[1]")).getText(), inputSubject.getText());
         lastLetter.click();
 
-        //assertEquals(inputToSend.getText(), driver.findElement(By.xpath("//div[@class='ha']/h2")).getText());
-        //assertEquals(inputSubject.getText(), driver.findElement(By.xpath("//h2[text()='Test mail']")).getText());
-        //assertEquals(inputForText.getText(), driver.findElement(By.xpath("//div[text()='This is the test letter for Automation']")).getText());
-        //assertEquals("setuplogfile.log", driver.findElement(By.xpath("//span[text()='setuplogfile.log']")).getText());
+        assertEquals(subject, driver.findElement(By.xpath("//div[@class='ha']/h2")).getText());
+        assertEquals("<testforhillelschool@gmail.com>", driver.findElement(By.xpath("//span[@class='go']")).getText());
+        assertEquals(textMail, driver.findElement(By.xpath("//div[@class='a3s aXjCH ']/div[@dir='ltr']")).getText());
+        assertEquals(fileName, driver.findElement(By.xpath("//span[@class='aV3 zzV0ie']")).getText());
     }
 
     public void uploadFile(String filePath) throws Exception {
