@@ -78,7 +78,6 @@ public class RozetkaFilters extends BaseTestClass {
         assertTrue(verifyThreeFilters(goodWithThreeFilters));
     }
 
-
     private boolean verifyFilterManufacturer(List<WebElement> elem) throws Exception {
         for (WebElement webElement : elem) {
             if (webElement.getText().contains("Acer") && webElement.getText().contains("Samsung") && webElement.getText().contains("Asus")) {

@@ -19,7 +19,7 @@ public class RozetkaTask1 extends BaseTestClass {
     String waitingForCompareButton = "//ul[@class='product-actions']";
     int positionFirstMonitor = 0;
     int searchedPriceFirstMonitor = 0;
-    int positionSecondMonitor =0;
+    int positionSecondMonitor = 0;
 
     @BeforeMethod
     //1. Navigate to https://rozetka.com.ua/
